@@ -4,14 +4,14 @@ Simple cURL wrapper.
 
 ## Installation
 
-```
+```bash
 $ composer require phpwrapper/curl dev-master
 ```
 
 
 ## Usage
 
-```
+```php
 <?php
 
 use PhpWrapper\Curl;
@@ -29,7 +29,7 @@ $curl = $curlFactory->create('https://api.example.com/v1');
 $curl->addHeader('Accept: application/json');
 $curl->addParameter('myKey', 'myValue');
 
-/** @var Curl\Response $response
+/** @var Curl\Response $response */
 $response = $curl->post();
 
 // or
