@@ -1,0 +1,22 @@
+{
+	"name": "phpwrapper/curl",
+	"description": "cURL wrapper",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jaroslav Hranička",
+			"email": "hranicka@outlook.com"
+		}
+	],
+	"require": {
+		"php": "^5.6|^7.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^5.1",
+		"squizlabs/php_codesniffer": "^2.5",
+		"artfocus/codestyle": "^2.0"
+	},
+	"autoload": {
+		"psr-4": {"PhpWrapper\\Curl\\": "src/"}
+	}
+}
