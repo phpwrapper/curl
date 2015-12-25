@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/shippable/567c2f691895ca447466e810.svg)](https://app.shippable.com/projects/567c2f691895ca447466e810)
+
 # PhpWrapper\Curl
 
 Simple cURL wrapper.
