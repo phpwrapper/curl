@@ -30,13 +30,16 @@ $curl->addHeader('Accept: application/json');
 $curl->addParameter('myKey', 'myValue');
 
 /** @var Curl\Response $response */
-$response = $curl->post();
-
-// or
 $response = $curl->get();
 
 // or
+$response = $curl->post();
+
+// or
 $response = $curl->put();
+
+// or
+$response = $curl->delete();
 
 
 // Process response

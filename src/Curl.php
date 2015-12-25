@@ -9,9 +9,10 @@ namespace PhpWrapper\Curl;
 class Curl
 {
 
-	const METHOD_POST = 'POST';
 	const METHOD_GET = 'GET';
+	const METHOD_POST = 'POST';
 	const METHOD_PUT = 'PUT';
+	const METHOD_DELETE = 'DELETE';
 
 	/** @var string */
 	private $url;
@@ -100,6 +101,16 @@ class Curl
 	 * @return Response
 	 * @throws RequestFailureException
 	 */
+	public function get()
+	{
+		$this->method = self::METHOD_GET;
+		return $this->exec();
+	}
+
+	/**
+	 * @return Response
+	 * @throws RequestFailureException
+	 */
 	public function post()
 	{
 		$this->method = self::METHOD_POST;
@@ -120,9 +131,9 @@ class Curl
 	 * @return Response
 	 * @throws RequestFailureException
 	 */
-	public function get()
+	public function delete()
 	{
-		$this->method = self::METHOD_GET;
+		$this->method = self::METHOD_DELETE;
 		return $this->exec();
 	}
 
@@ -132,13 +143,18 @@ class Curl
 	private function exec()
 	{
 		$url = $this->url;
-
 		$options = $this->options;
 
-		if ($this->method === self::METHOD_POST) {
-			$options[] = [CURLOPT_POST, TRUE];
-		} elseif ($this->method === self::METHOD_PUT) {
-			$option[] = [CURLOPT_CUSTOMREQUEST, 'PUT'];
+		switch ($this->method) {
+			case self::METHOD_GET:
+				break;
+
+			case self::METHOD_POST:
+				$options[] = [CURLOPT_POST, TRUE];
+				break;
+
+			default:
+				$options[] = [CURLOPT_CUSTOMREQUEST, $this->method];
 		}
 
 		if ($this->parameters) {
