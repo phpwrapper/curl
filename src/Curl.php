@@ -14,6 +14,8 @@ class Curl
 	const METHOD_PUT = 'PUT';
 	const METHOD_DELETE = 'DELETE';
 
+	const CURLOPT_JSON = 'curl.json';
+
 	/** @var string */
 	private $url;
 
@@ -62,6 +64,16 @@ class Curl
 	public function setResponseFactory(ResponseFactory $responseFactory)
 	{
 		$this->responseFactory = $responseFactory;
+		return $this;
+	}
+
+	/**
+	 * @param boolean $isJson
+	 * @return $this
+	 */
+	public function setIsJson($isJson)
+	{
+		$this->options[self::CURLOPT_JSON] = (bool)$isJson;
 		return $this;
 	}
 
@@ -161,7 +173,13 @@ class Curl
 			if ($this->method === self::METHOD_GET) {
 				$url .= '?' . http_build_query($this->parameters);
 			} else {
-				$options[] = [CURLOPT_POSTFIELDS, http_build_query($this->parameters)];
+				$isJson = isset($options[self::CURLOPT_JSON]) && $options[self::CURLOPT_JSON];
+
+				$data = ($isJson) ?
+					json_encode($this->parameters) :
+					http_build_query($this->parameters);
+
+				$options[] = [CURLOPT_POSTFIELDS, $data];
 			}
 		}
 
